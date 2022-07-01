@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.shortcut.dto.UrlDTO;
 import ru.job4j.shortcut.service.UrlService;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/site")
+@RequestMapping("/url")
 public class UrlController {
     private final UrlService service;
 

@@ -1,5 +1,7 @@
 package ru.job4j.shortcut.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,7 @@ public class SiteService {
     private final PersonRepository personRepository;
     private final SiteRepository siteRepository;
     private final BCryptPasswordEncoder encoder;
+
 
     public SiteService(PersonRepository personRepository, SiteRepository siteRepository, BCryptPasswordEncoder encoder) {
         this.personRepository = personRepository;

@@ -10,6 +10,7 @@ import ru.job4j.shortcut.model.Url;
 import ru.job4j.shortcut.repository.UrlRepository;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 public class UrlService {
 
     private final UrlRepository urlRepository;
+
+    private final int limitString = 7;
 
     public UrlService(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
@@ -29,17 +32,17 @@ public class UrlService {
         if (url == null || url.isEmpty() || urlEntity.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid url value");
         }
-        String shortcut = UUID.randomUUID().toString();
+        String shortcut = UUID.randomUUID().toString().substring(0, limitString);
         urlRepository.save(Url.of(url, shortcut));
         return ResponseEntity.ok("\"shortcut\" :" + "\"" + shortcut + "\"");
     }
 
-    public ResponseEntity redirect(String code) {
+    public ResponseEntity redirect(String code) throws URISyntaxException {
         var url = transactionalUpdateCalls(code);
         if (url.isPresent()) {
             HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setLocation(URI.create(url.get().getName()));
-            return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
+            httpHeaders.setLocation(new URI(url.get().getName()));
+            return new ResponseEntity(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Url not found");
     }
