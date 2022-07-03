@@ -11,16 +11,16 @@ This application is a service for safely connecting users to websites
 5. PostgreSQL
 
 User sends url. After successful registration of this url user receives login and password;
-![ScreenShot](images/1.jpg)
+![ScreenShot](images/1.JPG)
 
 After successful authentication user receives unique authorization token
-![ScreenShot](images/2.jpg)
+![ScreenShot](images/2.JPG)
 
 Authorized user sends url and receives shortcut for this url
-![ScreenShot](images/3.jpg)
+![ScreenShot](images/3.JPG)
 
 Sending shortcut to "/redirect" redirects user to mapped url
-![ScreenShot](images/4.jpg)
+![ScreenShot](images/4.JPG)
 
 Authorized user can get statistics for all registered urls
-![ScreenShot](images/5.jpg)
+![ScreenShot](images/5.JPG)
